@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Random Meme</title>
+  <!-- optional: reuse same stylesheet created earlier -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #meme-title {font-size:1.5rem;margin-bottom:1rem;color:#e0e7ff;}
+    #meme-container {text-align:center;max-width:600px;margin:2rem auto;}
+    #meme-img {max-width:100%;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    #reload {margin-top:1rem;}
+  </style>
+</head>
+<body style="background-color:#0f172a;">
+  <div id="meme-container" class="container">
+    <h1 id="meme-title">Loading...</h1>
+    <p id="meme-sub" class="muted"></p>
+    <img id="meme-img" src="" alt="meme image" />
+    <p><button id="reload" class="btn">New meme</button></p>
+  </div>
+
+  <script src="meme.js"></script>
+</body>
+</html>
