@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Hover Örneği</title>
+<style>
+  /* Temel buton stili */
+  .btn {
+    background: #00bfff;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* Fare üstünde olduğu zaman */
+  .btn:hover {
+/* Çerçeve */
+    outline: 2px solid #005f73;      /* kalınlık + renk + stil */
+
+    /* (Opsiyonel) Kenar boşluğu kaldırmak için */
+    outline-offset: 2px;              /* Çerçevenin kenarlara dokunmasını önler */
+
+    /* Diğer tipik buton stilleri */
+    background:#008cba;
+    color:#fff;
+    padding:12px 24px;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<button class="btn">Hover Et!</button>
+
+</body>
+</html>

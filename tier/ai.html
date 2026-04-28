@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ollama Chat (Local AI)</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f0f0f0}
+  #app{max-width:700px;margin:2rem auto;background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);display:flex;flex-direction:column;height:90vh}
+  header{padding:1rem;border-bottom:1px solid #ddd;display:flex;align-items:center;gap:0.5rem}
+  header h1{margin:0;font-size:1.5rem;flex:1}
+  #modelSelect{padding:0.4rem;font-size:1rem}
+  #messages{flex:1;overflow-y:auto;padding:1rem}
+  .msg{margin:0.5rem 0}
+  .msg.user{text-align:right}
+  .msg.user .bubble{background:#4caf50;color:#fff}
+  .msg.bot .bubble{background:#e0e0e0}
+  .bubble{display:inline-block;padding:0.8rem 1rem;border-radius:16px;max-width:80%}
+  #inputBar{display:flex;border-top:1px solid #ddd}
+  #input{flex:1;border:none;padding:1rem;font-size:1rem}
+  #send{border:none;background:#4caf50;color:#fff;padding:0 1.5rem;font-size:1rem;cursor:pointer}
+  #send:hover{background:#45a049}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Ollama Chat</h1>
+    <select id="modelSelect"></select>
+  </header>
+  <div id="messages"></div>
+  <div id="inputBar">
+    <input type="text" id="input" placeholder="Type your message..." autocomplete="off">
+    <button id="send">Send</button>
+  </div>
+</div>
+
+<script>
+  // ---- Configuration ----
+  const API_URL = 'http://localhost:11434/api/chat';
+  const MODEL_LIST_URL = 'http://localhost:11434/api/tags';   // to fetch available models
+
+  // ---- DOM elements ----
+  const modelSelect = document.getElementById('modelSelect');
+  const messagesDiv = document.getElementById('messages');
+  const inputEl = document.getElementById('input');
+  const sendBtn = document.getElementById('send');
+
+  // ---- Helper ----
+  function addMessage(text, type='bot') {
+    const msg = document.createElement('div');
+    msg.className = `msg ${type}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.textContent = text;
+    msg.appendChild(bubble);
+    messagesDiv.appendChild(msg);
+    msg.scrollIntoView({behavior:'smooth'});
+  }
+
+  // ---- Load model list ----
+  async function loadModels() {
+    try {
+      const resp = await fetch(MODEL_LIST_URL);
+      const data = await resp.json();
+      data.models.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.model;
+        opt.textContent = `${m.model} (${m.modelfile})`;
+        modelSelect.appendChild(opt);
+      });
+      if (modelSelect.options.length) modelSelect.selectedIndex = 0;
+    } catch(err) {
+      console.error('Could not load models', err);
+      alert('Error loading models. Make sure Ollama is running.');
+    }
+  }
+
+  // ---- Send message ----
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    inputEl.value = '';
+    inputEl.focus();
+
+    const selectedModel = modelSelect.value;
+    if (!selectedModel) {
+      addMessage('⚠️ No model selected', 'bot');
+      return;
+    }
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          model: selectedModel,
+          prompt: text,
+          stream: false          // false -> single response, true -> streaming
+        })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      // Ollama returns {message: {content: "text"}, done: true}
+      const reply = data.message?.content ?? '[No content]';
+      addMessage(reply, 'bot');
+    } catch (err) {
+      console.error(err);
+      addMessage(`⚠️ ${err.message}`, 'bot');
+    }
+  }
+
+  // ---- Event listeners ----
+  sendBtn.addEventListener('click', sendMessage);
+  inputEl.addEventListener('keydown', e => { if (e.key==='Enter') sendMessage(); });
+
+  // ---- Init ----
+  loadModels();
+</script>
+</body>
+</html>
