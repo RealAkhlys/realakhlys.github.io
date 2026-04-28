@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="tr">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Akhlys</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="container nav">
+		<div class="brand">Akhlys</div>
+		<nav class="nav-links">
+			<a class="muted" href="docs.html">Doküman</a>
+			<button class="btn">Başla</button>
+		</nav>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<div class="hero-text">
+				<h1>Ana Sayfa</h1>
+				<p class="muted">Açmak istediğiniz projeyi seçin.</p>
+			</div>
+			<div>
+				<button class="btn">Primary</button>
+			</div>
+		</section>
+
+		<section class="grid">
+			<article class="btn secondary" onclick="window.location.href='meme.html'">
+				<h3>Meme API</h3>
+				<p class="muted">Github Projesi: D3vd/Meme_Api<br>API Link: meme-api.com/gimme</p>
+			</article>
+			<article class="btn secondary" onclick="window.location.href='tier/main.html'">
+				<h3>Tierlist Maker</h3>
+				<p class="muted">Make Your Own Tierlists With Your Own Photos<br>Reference: https://tiermaker.com/</p>
+			</article>
+			<article class="card">
+				<h3>Card Three</h3>
+				<p class="muted">Simple utilities: `.muted`, `.kbd`, and `.btn` are included.</p>
+			</article>
+		</section>
+	</main>
+
+	<footer class="footer">Made with a public CSS template • Copy or adapt freely</footer>
+</body>
+</html>
