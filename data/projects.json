@@ -1,0 +1,20 @@
+[
+  {
+    "id": "e-commerce-platform",
+    "title": "AI-Powered E-Commerce",
+    "tagline": "A next-gen shopping experience with smart recommendations.",
+    "description": "This project integrates advanced machine learning models to predict user preferences and dynamically update the storefront. Built with scale and performance in mind.",
+    "tags": ["React", "Node.js", "Python", "Tailwind"],
+    "github": "https://github.com/realakhlys/ecommerce",
+    "live": "https://realakhlys.github.io/ecommerce"
+  },
+  {
+    "id": "task-manager",
+    "title": "Minimalist Task Manager",
+    "tagline": "A sleek, distraction-free productivity app.",
+    "description": "A local-first project management tool utilizing IndexedDB for offline persistence and smooth drag-and-drop mechanics.",
+    "tags": ["JavaScript", "HTML5", "CSS3"],
+    "github": "https://github.com/realakhlys/taskmanager",
+    "live": "https://realakhlys.github.io/taskmanager"
+  }
+]
