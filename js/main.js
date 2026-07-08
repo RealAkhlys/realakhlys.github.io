@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('projects-grid');
 
-    // Fetch the project configuration
     fetch('data/projects.json')
         .then(response => response.json())
         .then(projects => {
             projects.forEach(project => {
-                // Dynamically build the cards pointing to project.html?id=...
                 const card = document.createElement('div');
                 card.className = 'card';
+                
+                // Customize card slightly based on individual theme elements if desired
+                if(project.theme) {
+                    card.style.borderColor = project.theme.accent + '40'; // 25% opacity border
+                }
                 
                 const tagsHTML = project.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
@@ -18,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>${project.tagline}</p>
                         <div class="tags-container">${tagsHTML}</div>
                     </div>
-                    <a href="project.html?id=${project.id}" class="btn">View Project Details →</a>
+                    <a href="project.html?id=${project.id}" class="btn" style="color: ${project.theme?.accent || '#fff'}">View Details →</a>
                 `;
                 grid.appendChild(card);
             });
         })
-        .catch(err => console.error('Error loading projects:', err));
+        .catch(err => console.error('Error rendering primary portfolio panel:', err));
 });

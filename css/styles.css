@@ -1,4 +1,5 @@
 :root {
+    /* Falling back to default dark theme if JSON properties are missing */
     --bg-color: #0f172a;
     --card-bg: #1e293b;
     --text-main: #f8fafc;
@@ -14,6 +15,7 @@ body {
     margin: 0;
     padding: 2rem;
     line-height: 1.5;
+    transition: background-color 0.3s ease; /* Smooth transition look */
 }
 
 header, nav {
@@ -24,9 +26,10 @@ header, nav {
 .back-btn {
     color: var(--accent);
     text-decoration: none;
+    font-weight: bold;
 }
 
-/* Projects Grid on Index */
+/* Home Grid Elements */
 .projects-grid {
     max-width: 1200px;
     margin: 0 auto;
@@ -35,7 +38,6 @@ header, nav {
     gap: 2rem;
 }
 
-/* Card Styling */
 .card {
     background-color: var(--card-bg);
     padding: 1.5rem;
@@ -46,10 +48,10 @@ header, nav {
     justify-content: space-between;
 }
 
-.card h2 { margin-top: 0; color: var(--text-main); }
-.card p { color: var(--text-muted); font-size: 0.95rem; }
+.card h2 { margin-top: 0; }
+.card p { color: var(--text-muted); }
 
-/* Tags */
+/* Language Badges */
 .tags-container {
     display: flex;
     flex-wrap: wrap;
@@ -57,33 +59,49 @@ header, nav {
     margin: 1rem 0;
 }
 .tag {
-    background: #334155;
+    background: rgba(255, 255, 255, 0.1);
     padding: 0.2rem 0.6rem;
     border-radius: 4px;
     font-size: 0.8rem;
     color: var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Buttons & Links */
+/* Dynamic Showcase Photo Gallery CSS */
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.gallery-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Action Links and Buttons */
 .btn {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #334155;
+    background-color: var(--card-bg);
     color: white;
     text-decoration: none;
     border-radius: 4px;
     font-size: 0.9rem;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.btn.live { background-color: var(--accent); color: var(--bg-color); font-weight: bold; }
+.btn.live { background-color: var(--accent); color: #000; font-weight: bold; }
 .btn.live:hover { background-color: var(--accent-hover); }
 
-/* Individual Project Page Template layout */
-.project-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-.project-container h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+/* Case Layout Specifics */
+.project-container { max-width: 800px; margin: 0 auto; }
 .tagline { font-size: 1.2rem; color: var(--text-muted); }
-.project-content { margin: 2rem 0; font-size: 1.1rem; color: #cbd5e1; }
+.project-content { margin: 2rem 0; font-size: 1.1rem; }
 .project-links { display: flex; gap: 1rem; }
+hr { border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;}

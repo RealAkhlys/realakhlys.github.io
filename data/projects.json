@@ -6,6 +6,16 @@
     "description": "This project is a meme generator that allows users to create memes by selecting images and adding text. It utilizes an API to fetch meme templates and provides a user-friendly interface for customization.",
     "tags": ["API", "HTML", "JavaScript"],
     "github": "",
-    "live": "https://realakhlys.github.io/meme"
+    "live": "https://realakhlys.github.io/meme",
+    "theme": {
+      "bg": "#052e16",
+      "cardBg": "#14532d",
+      "accent": "#4ade80",
+      "accentHover": "#22c55e"
+    },
+    "images": [
+      "https://picsum.photos/800/450?random=4",
+      "https://picsum.photos/800/450?random=5"
+    ]
   }
 ]
